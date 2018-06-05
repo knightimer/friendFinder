@@ -1,3 +1,6 @@
+
+//npm package
+
 var express = require("express")
 var friends = require('../data/friends.js');
 var path = require('path');
@@ -23,16 +26,15 @@ var path = require('path');
       friendDifference: 1000
     };
 
-    // Here we take the result of the user"s survey POST and parse it.
+    // user"s survey POST result..
     var userData = req.body;
     var userScores = userData.scores;
   
 
-    // This variable will calculate the difference between the user"s scores and the scores of
-    // each user in the database
+    // Variable to calculate diffence between scores
     var totalDifference = 0;
 
-    // Here we loop through all the friend possibilities in the database.
+    // Here we loop through all the friends.
     for (var i = 0; i < friends.length; i++) {
 
       console.log(friends[i].name);
@@ -55,11 +57,11 @@ var path = require('path');
       }
     }
 
-    // Finally save the user's data to the database (this has to happen AFTER the check. otherwise,
-    // the database will always return that the user is the user's best friend).
+    // Save the user's data to the database
+    
     friends.push(userData);
 
-    // Return a JSON with the user's bestMatch. This will be used by the HTML in the next page
+    // Return a JSON with the user's best match. 
     res.json(bestMatch);
 
   });
