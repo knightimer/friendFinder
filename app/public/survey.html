@@ -36,6 +36,7 @@
                     <br>
                     <label for="q1">I love long walks on the beach.</label>
                     <select class="form-control" id="q1">
+                        <option value=""></option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2 (Somewhat Disagree</option>
                         <option value="3">3 (No Preference)</option>
@@ -45,6 +46,7 @@
 
                     <label for="q2">I love the outdoors.</label>
                     <select class="form-control" id="q2">
+                        <option value=""></option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2 (Somewhat Disagree</option>
                         <option value="3">3 (No Preference)</option>
@@ -54,6 +56,7 @@
 
                     <label for="q3"> I love to travel.</label>
                     <select class="form-control" id="q3">
+                        <option value=""></option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2 (Somewhat Disagree</option>
                         <option value="3">3 (No Preference)</option>
@@ -63,6 +66,7 @@
 
                     <label for="q4">I consider myself a foodie.</label>
                     <select class="form-control" id="q4">
+                        <option value=""></option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2 (Somewhat Disagree</option>
                         <option value="3">3 (No Preference)</option>
@@ -72,6 +76,7 @@
 
                     <label for="q5"> I consider myself a city person vs a suburban person.</label>
                     <select class="form-control" id="q5">
+                        <option value=""></option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2 (Somewhat Disagree</option>
                         <option value="3">3 (No Preference)</option>
@@ -81,6 +86,7 @@
 
                     <label for="q6">I am a night owl.</label>
                     <select class="form-control" id="q6">
+                        <option value=""></option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2 (Somewhat Disagree</option>
                         <option value="3">3 (No Preference)</option>
@@ -90,6 +96,7 @@
 
                     <label for="q7"> I don't sweat the small stuff.</label>
                     <select class="form-control" id="q7">
+                        <option value=""></option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2 (Somewhat Disagree</option>
                         <option value="3">3 (No Preference)</option>
@@ -99,6 +106,7 @@
 
                     <label for="q8">My favorite holiday is Holloween.</label>
                     <select class="form-control" id="q8">
+                        <option value=""></option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2 (Somewhat Disagree</option>
                         <option value="3">3 (No Preference)</option>
@@ -108,6 +116,7 @@
 
                     <label for="q9">I am liberal.</label>
                     <select class="form-control" id="q9">
+                        <option value=""></option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2 (Somewhat Disagree</option>
                         <option value="3">3 (No Preference)</option>
@@ -117,6 +126,7 @@
 
                     <label for="q10">I love to sleep in on weekends.</label>
                     <select class="form-control" id="q10">
+                        <option value=""></option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2 (Somewhat Disagree</option>
                         <option value="3">3 (No Preference)</option>
@@ -135,7 +145,7 @@
                 <div class="col-lg-12">
                     <div class="footer"> 
                         <p>
-                            <a class="links" href="/app/data/friends">API Friends List</a> | <a class="links" href="knightimer.github.io/survey">Github Repo</a>
+                            <a class="links" href="/api/friends">API Friends List</a> | <a class="links" href="knightimer.github.io">Github Repo</a>
                             <br>
                         </p>
                     </div> 
@@ -148,18 +158,38 @@
         </div>
 
         <!-- Modal -->
+	<div id="resultsModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+      
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h2 class="modal-title"><strong>Best Match</strong></h2>
+                </div>
+                <div class="modal-body">
+                  <h2 id="matchName"></h2>
+                  <img id="matchImg" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg" alt="">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+      
+            </div>
+          </div>
         <div id="resultsModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
-                <!-- Modal content-->
-                <div class="modal-content">
+                <!--Modal content-->
+                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h2>Best Match</h2>
                     </div>
                     <div class="modal-body">
-                        <h3 id="matchName"></h3>
-                        <img id="matchImg" src=alt="">
+                        <h3 id="match-name"></h3>
+                        <img id="match-img" src=alt="">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -167,84 +197,77 @@
                 </div>
 
             </div>
-        </div>
+        </div> 
     </div>
     
-         
-
-</body>
-
-<script type="text/javascript">
-
+<script>     
     var config = {
-        ".chosen-select": {},
-        ".chosen-select-deselect": {
-            allow_single_deselect: true
-        },
-        ".chosen-select-no-single": {
-            disable_search_threshold: 10
-        },
-        ".chosen-select-no-results": {
-            no_results_text: "Sorry, nothing match found!"
-        },
-        ".chosen-select-width": {
-            width: "95%"
-        }
-    };
-    for (var selector in config) {
-        $(selector).chosen(config[selector]);
+      '.chosen-select'           : {},
+      '.chosen-select-deselect'  : {allow_single_deselect:true},
+      '.chosen-select-no-single' : {disable_search_threshold:10},
+      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+      '.chosen-select-width'     : {width:"95%"}
     }
-    // Capture the form inputs
-    $("#submit").on("click", function () {
-        // Form validation
-        function validateForm() {
-            var isValid = true;
-            $(".form-control").each(function () {
-                if ($(this).val() === "") {
-                    isValid = false;
-                }
-            });
-            $(".chosen-select").each(function () {
-                if ($(this).val() === "") {
-                    isValid = false;
-                }
-            });
-            return isValid;
-        }
-        // If all required fields are filled
-        if (validateForm()) {
-            // Create an object for the user"s data
-            var userData = {
-                name: $("#name").val(),
-                photo: $("#photo").val(),
-                scores: [
-                    $("#q1").val(),
-                    $("#q2").val(),
-                    $("#q3").val(),
-                    $("#q4").val(),
-                    $("#q5").val(),
-                    $("#q6").val(),
-                    $("#q7").val(),
-                    $("#q8").val(),
-                    $("#q9").val(),
-                    $("#q10").val()
-                ]
-            };
-            // Grab the URL of the website
-            var currentURL = window.location.origin;
-            // AJAX post the data to the friends API.
-            $.post(currentURL + "/api/friends", userData, function (data) {
-                // Grab the result from the AJAX post so that the best match's name and photo are displayed.
-                $("#matchName").text(data.name);
-                $("#matchImg").attr("src", data.photo);
-                // Show the modal with the best match
-                $("#resultsModal").modal("toggle");
-            });
-        } else {
-            alert("Please fill answer all the questions before submitting!");
-        }
-        return false;
-    });
-</script>
 
+    for (var selector in config) {
+      $(selector).chosen(config[selector]);
+    }
+    // Capture the form inputs 
+    $("#submit").on("click", function(){
+    	// Form validation
+    	function validateForm() {
+		  var isValid = true;
+		  $('.form-control').each(function() {
+		    if ( $(this).val() === '' )
+		        isValid = false;
+		  });
+		  $('.chosen-select').each(function() {
+		  	if( $(this).val() === "")
+		  		isValid = false
+		  })
+		  return isValid;
+		}
+		// If all required fields are filled
+		if (validateForm() == true)
+		{
+			// Create an object for the user's data
+	    	var userData = {
+	    		name: $("#name").val(),
+	    		photo: $("#photo").val(),
+	    		scores: [
+	    			$("#q1").val(),
+	    			$("#q2").val(),
+	    			$("#q3").val(),
+	    			$("#q4").val(),
+	    			$("#q5").val(),
+	    			$("#q6").val(),
+	    			$("#q7").val(),
+	    			$("#q8").val(),
+	    			$("#q9").val(),
+	    			$("#q10").val(), ]
+	    	}
+	    	// Grab the URL of the website
+	    	var currentURL = window.location.origin;
+	    	// AJAX post the data to the friends route. 
+	    	$.post(currentURL + "/api/friends", userData, function(data){
+	    		// Grab the result from the AJAX post so that the best match's name and photo are displayed.
+	    		$("#matchName").text(data.name);
+	    		$("#matchImg").attr("src", data.photo);
+		    	// Show the modal with the best match 
+		    	$("#resultsModal").modal('toggle');
+	    	});
+		}
+		else
+		{
+			alert("Please fill out all fields before submitting!");
+		}
+    	
+    	return false;
+    });
+  </script>
+</body>
 </html>
+
+    
+    
+    

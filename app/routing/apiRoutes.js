@@ -1,113 +1,130 @@
-
-//npm package
-
-var express = require("express")
-var friends = require('../data/friends.js');
+// ===============================================================================
+// LOAD DATA - From Hot Restraurant Example
+// Linking routes to the friend "data" source.
+// ===============================================================================
 var path = require('path');
+var friends = require("../data/friends.js");
 
-  module.exports = function(app){
-    app.get('/api/friends', function(req, res){
-      res.json(friends);
 
-  // API GET Requests
-  app.get('/api/friends', function(req, res){
+// ===============================================================================
+// ROUTING
+// ===============================================================================
+module.exports = function(app) {
+  // API GET Request
+  // ---------------------------------------------------------------------------
+  app.get("/api/friends", function(req, res) {
     res.json(friends);
   });
 
 
-  // API POST REQUEST -- user submits a form and it submits data to the server.
-  app.post('/api/friends', function(req, res){
+  // API POST Requests
+  // Below code handles when a user submits a form and thus submits data to the server.
+  // In each of the below cases, when a user submits form data (a JSON object)
+  // ...the JSON is pushed to the appropriate JavaScript array
+  // (ex. User fills out a reservation request... this data is then sent to the server...
+  // Then the server saves the data to the tableData array)
+  // ---------------------------------------------------------------------------
 
-  // Survey Matching data from User
-    
-  var bestMatch = {
-      name: "",
-      photo: "",
-      friendDifference: 1000
-    };
+  app.post("/api/friends", function(req, res) {
+  // will handle the incoming survey results and compatibility logic
+   var userInput = req.body;
+      var userResponse = userInput.scores;
+      var match = {
+        name: "",
+        photo: "",
+        difference: Infinity
+      };
 
-    // user"s survey POST result..
-    var userData = req.body;
-    var userScores = userData.scores;
-  
-
-    // Variable to calculate diffence between scores
-    var totalDifference = 0;
-
-    // Here we loop through all the friends.
-    for (var i = 0; i < friends.length; i++) {
-
-      console.log(friends[i].name);
-      totalDifference = 0;
-
-      // We then loop through all the scores of each friend
-      for (var j = 0; j < friends[i].scores[j]; j++) {
-
-        // We calculate the difference between the scores and sum them into the totalDifference
-        totalDifference += Math.abs(parseInt(userScores[j]) - parseInt(friends[i].scores[j]));
-
-        // If the sum of differences is less then the differences of the current "best match"
-        if (totalDifference <= bestMatch.friendDifference) {
-
-          // Reset the bestMatch to be the new friend.
-          bestMatch.name = friends[i].name;
-          bestMatch.photo = friends[i].photo;
-          bestMatch.friendDifference = totalDifference;
+      for (var i = 0; i < friends.length; i++) {
+        var totalDifference = 0;
+        for (var j = 0; j < userResponse.length; j++) {
+          totalDifference += Math.abs(friends[i].scores[j] - userResponse[j]);
+          
+          if (totalDifference <= match.difference){
+              match.name = friends[i].name;
+              match.photo = friends[i].photo;
+              match.difference = totalDifference;
+          }
         }
       }
-    }
 
-    // Save the user's data to the database
-    
-    friends.push(userData);
+      friends.push(userInput);
 
-    // Return a JSON with the user's best match. 
-    res.json(bestMatch);
+      res.json(match);
 
-  });
-
-};
-
-var Friends = require('../data/friends.js');
-
-module.exports = function(app){
-
-	// API GET Requests
-	app.get('/api/friends', function(req, res){
-		res.json(Friends);
-	});
+    });
+  };
 
 
-	// user submits a form and it submits data to the server.
-	app.post('/api/friends', function(req, res){
 
-	// setting a variable for the user's response
-    var userData = req.body;
-    	// the total difference starts off at 0 
-		var totalDifference = 0;
-		// all differences is an empty array into which the scores of each potential friend the user is being compared to will go
-		var allDifferences = []; 
 
-	//loop through all of the stored friends 
-	for (var i=0; i<(Friends.length-1); i++){
 
-		//loop through all of question values and sum total their subtracted absolute values
-		for (var j=0; j<10; j++){
-			// this adds the numerical answers of each friend to the total difference; then uses the absolute value to determine the difference between the two (absolute value is used so that 5-3 and 3-5 both equal 2)
-			totalDifference += Math.abs(Friends[i].scores[j] - newFriend.scores[j]);
-		}
 
-		// each total difference, for each potential friend, is pushed into the allDifferences array 
-		allDifferences.push(totalDifference);
-		// total difference is reset back to zero
-		totalDifference = 0;
-	}
 
-	//best match will give the smallest values 
-	var bestMatch = Friends[allDifferences.indexOf(Math.min.apply(null, allDifferences))];
 
-	res.send(bestMatch);
-	console.log(bestMatch);
 
-	});
-}
+
+
+
+
+
+
+
+
+
+// ===============================================================================
+// LOAD DATA - From Hot Restraurant Example
+// Linking routes to the friend "data" source.
+// ===============================================================================
+// var path = require('path');
+// var friends = require("../data/friends.js");
+
+
+// // ===============================================================================
+// // ROUTING
+// // ===============================================================================
+// module.exports = function(app) {
+//   // API GET Request
+//   // ---------------------------------------------------------------------------
+//   app.get("/api/friends", function(req, res) {
+//     res.json(friends);
+//   });
+
+
+  // API POST Requests
+  // Below code handles when a user submits a form and thus submits data to the server.
+  // In each of the below cases, when a user submits form data (a JSON object)
+  // ...the JSON is pushed to the appropriate JavaScript array
+  // (ex. User fills out a reservation request... this data is then sent to the server...
+  // Then the server saves the data to the tableData array)
+  // ---------------------------------------------------------------------------
+
+  // app.post("/api/friends", function(req, res) {
+  // // will handle the incoming survey results and compatibility logic
+  //  var userInput = req.body;
+  //     var userResponse = userInput.scores;
+  //     var match = {
+  //       name: "",
+  //       photo: "",
+  //       difference: 500
+  //     };
+
+  //     for (var i = 0; i < friends.length; i++) {
+  //       var totalDifference = 0;
+  //       for (var j = 0; j < userResponse.length; j++) {
+  //         totalDifference += Math.abs(friends[i].scores[j] - userResponse[j]);
+          
+  //         if (totalDifference <= match.difference){
+  //             match.name = friends[i].name;
+  //             match.photo = friends[i].photo;
+  //             match.difference = totalDifference;
+  //         }
+  //       }
+  //     }
+
+  //     friends.push(userInput);
+
+  //     res.json(match);
+
+  //   });
+  // };
