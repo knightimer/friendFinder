@@ -5,15 +5,15 @@ var friends = [
     name:"Captain America",
     photo:"https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwjyqNrRlenbAhX3BjQIHaofA5AQjRx6BAgBEAU&url=http%3A%2F%2Fblogrorangindonesia.blogspot.com%2F2014%2F09%2Fkarakter-guardians-of-galaxy-ini-punya.html&psig=AOvVaw3YzLHrEfb7CTRStnOcezoL&ust=1529822092134190",
     scores:[
-      "5",
       "1",
-      "4",
-      "4",
-      "5",
       "1",
-      "2",
-      "5",
-      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
       "1"
     ]
   },
@@ -51,7 +51,7 @@ var friends = [
   },
   {
     name: "Black Widow",
-    photo: "https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwjE2KmtlunbAhXxGTQIHR3ZAZUQjRx6BAgBEAU&url=https%3A%2F%2Fwww.themarysue.com%2Fmarvel-has-too-much-on-their-plates-for-black-widow%2F&psig=AOvVaw18kGZy8uKnQyxlsI6d8NiE&ust=1529822305626757",
+    photo: "https://am23.akamaized.net/tms/cnt/uploads/2014/08/scarjo.jpg",
     scores: [
       "3",
       "2",
